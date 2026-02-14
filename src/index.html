@@ -11,10 +11,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <!-- Stylesheets (order matters) -->
-  <link rel="stylesheet" href="tokens.css">
-  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="../tokens.css">
+  <link rel="stylesheet" href="../base.css">
   <link rel="stylesheet" href="header.css">
-  <link rel="stylesheet" href="category.css">
+  <link rel="stylesheet" href="../category.css">
   <link rel="stylesheet" href="todo.css">
   <link rel="stylesheet" href="responsive.css">
 </head>
@@ -33,11 +33,121 @@
       </div>
     </header>
 
-    <!-- ===== Categories & Todos (added by other devs) ===== -->
-    <!-- category sections go here -->
+    <!-- ====== Morning Routine ====== -->
+    <details class="category glass" open>
+      <summary class="category__header">
+        <span class="category__icon">🌅</span>
+        <span class="category__title">Morning Routine</span>
+        <span class="category__count"></span>
+        <span class="category__chevron"></span>
+      </summary>
+      <ul class="category__list">
+        <li class="todo">
+          <input type="checkbox" id="todo-1" class="todo__checkbox sr-only">
+          <label for="todo-1" class="todo__label">
+            <span class="todo__checkmark"></span>
+            <span class="todo__text">Meditate for 10 minutes</span>
+            <span class="todo__tag todo__tag--low">low</span>
+          </label>
+        </li>
+        <li class="todo">
+          <input type="checkbox" id="todo-2" class="todo__checkbox sr-only">
+          <label for="todo-2" class="todo__label">
+            <span class="todo__checkmark"></span>
+            <span class="todo__text">Review daily goals</span>
+            <span class="todo__tag todo__tag--medium">medium</span>
+          </label>
+        </li>
+        <li class="todo">
+          <input type="checkbox" id="todo-3" class="todo__checkbox sr-only">
+          <label for="todo-3" class="todo__label">
+            <span class="todo__checkmark"></span>
+            <span class="todo__text">Morning workout</span>
+            <span class="todo__tag todo__tag--high">high</span>
+          </label>
+        </li>
+      </ul>
+    </details>
 
-    <!-- ===== Filters (added by other devs) ===== -->
-    <!-- filter controls go here -->
+    <!-- ====== Work ====== -->
+    <details class="category glass" open>
+      <summary class="category__header">
+        <span class="category__icon">💼</span>
+        <span class="category__title">Work</span>
+        <span class="category__count"></span>
+        <span class="category__chevron"></span>
+      </summary>
+      <ul class="category__list">
+        <li class="todo">
+          <input type="checkbox" id="todo-4" class="todo__checkbox sr-only">
+          <label for="todo-4" class="todo__label">
+            <span class="todo__checkmark"></span>
+            <span class="todo__text">Check emails and Slack</span>
+            <span class="todo__tag todo__tag--medium">medium</span>
+          </label>
+        </li>
+        <li class="todo">
+          <input type="checkbox" id="todo-5" class="todo__checkbox sr-only">
+          <label for="todo-5" class="todo__label">
+            <span class="todo__checkmark"></span>
+            <span class="todo__text">Ship feature update</span>
+            <span class="todo__tag todo__tag--high">high</span>
+          </label>
+        </li>
+        <li class="todo">
+          <input type="checkbox" id="todo-6" class="todo__checkbox sr-only">
+          <label for="todo-6" class="todo__label">
+            <span class="todo__checkmark"></span>
+            <span class="todo__text">Code review PRs</span>
+            <span class="todo__tag todo__tag--medium">medium</span>
+          </label>
+        </li>
+        <li class="todo">
+          <input type="checkbox" id="todo-7" class="todo__checkbox sr-only">
+          <label for="todo-7" class="todo__label">
+            <span class="todo__checkmark"></span>
+            <span class="todo__text">Update project docs</span>
+            <span class="todo__tag todo__tag--low">low</span>
+          </label>
+        </li>
+      </ul>
+    </details>
+
+    <!-- ====== Evening ====== -->
+    <details class="category glass" open>
+      <summary class="category__header">
+        <span class="category__icon">🌙</span>
+        <span class="category__title">Evening</span>
+        <span class="category__count"></span>
+        <span class="category__chevron"></span>
+      </summary>
+      <ul class="category__list">
+        <li class="todo">
+          <input type="checkbox" id="todo-8" class="todo__checkbox sr-only">
+          <label for="todo-8" class="todo__label">
+            <span class="todo__checkmark"></span>
+            <span class="todo__text">Read for 30 minutes</span>
+            <span class="todo__tag todo__tag--low">low</span>
+          </label>
+        </li>
+        <li class="todo">
+          <input type="checkbox" id="todo-9" class="todo__checkbox sr-only">
+          <label for="todo-9" class="todo__label">
+            <span class="todo__checkmark"></span>
+            <span class="todo__text">Plan tomorrow's tasks</span>
+            <span class="todo__tag todo__tag--medium">medium</span>
+          </label>
+        </li>
+        <li class="todo">
+          <input type="checkbox" id="todo-10" class="todo__checkbox sr-only">
+          <label for="todo-10" class="todo__label">
+            <span class="todo__checkmark"></span>
+            <span class="todo__text">Digital detox by 10pm</span>
+            <span class="todo__tag todo__tag--high">high</span>
+          </label>
+        </li>
+      </ul>
+    </details>
 
   </div>
 </body>
