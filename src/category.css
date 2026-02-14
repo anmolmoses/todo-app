@@ -1,0 +1,90 @@
+/* Category Sections — Dev-3 */
+
+/* Remove default details/summary markers */
+summary {
+  list-style: none;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Category container */
+.category {
+  margin-bottom: var(--space-4);
+  border-left: 3px solid var(--color-dew-300);
+  border-radius: var(--radius-panel);
+  overflow: hidden;
+}
+
+/* Category header */
+.category__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+  user-select: none;
+}
+
+.category__header:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-item);
+}
+
+/* Icon */
+.category__icon {
+  font-size: 1.25em;
+  line-height: 1;
+}
+
+/* Title */
+.category__title {
+  flex: 1;
+}
+
+/* Chevron — CSS-only arrow via borders */
+.category__chevron {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid var(--color-text);
+  border-left: 8px solid transparent;
+  transform: rotate(90deg);
+  transition: transform var(--transition-base);
+}
+
+details[open] > summary .category__chevron {
+  transform: rotate(180deg);
+}
+
+/* Category list */
+.category__list {
+  list-style: none;
+  margin: 0;
+  padding: 0 var(--space-3) var(--space-3);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-slow);
+}
+
+details[open] > .category__list {
+  max-height: 800px;
+}
+
+/* Spacing between todo items */
+.category__list > .todo + .todo {
+  margin-top: var(--space-1);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .category__chevron,
+  .category__list {
+    transition: none;
+  }
+}
