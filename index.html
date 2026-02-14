@@ -4,15 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ahintodew — Daily Todo</title>
+
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets (order matters: tokens → base → components → responsive) -->
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="src/header.css">
   <link rel="stylesheet" href="category.css">
+  <link rel="stylesheet" href="src/todo.css">
+  <link rel="stylesheet" href="src/responsive.css">
 </head>
 <body>
   <div class="app">
+
+    <!-- ===== Header & Branding (dev-1 scaffold) ===== -->
+    <header class="header glass">
+      <div class="header__brand">
+        <h1 class="header__title">Ahintodew</h1>
+        <p class="header__subtitle">a hint of clarity for your day</p>
+      </div>
+      <div class="header__stats">
+        <span class="header__stat">Tasks: <span class="header__counter header__counter--total"></span></span>
+        <span class="header__stat">Done: <span class="header__counter header__counter--done"></span></span>
+      </div>
+    </header>
 
     <!-- ====== Morning Routine ====== -->
     <details class="category glass" open>
@@ -23,7 +42,7 @@
         <span class="category__chevron"></span>
       </summary>
       <ul class="category__list">
-        <!-- Todo 1 -->
+        <!-- Todo 1: Meditate -->
         <li class="todo">
           <input type="checkbox" id="todo-1" class="todo__checkbox sr-only">
           <label for="todo-1" class="todo__label">
@@ -32,7 +51,7 @@
             <span class="todo__tag todo__tag--low">low</span>
           </label>
         </li>
-        <!-- Todo 2 -->
+        <!-- Todo 2: Goals -->
         <li class="todo">
           <input type="checkbox" id="todo-2" class="todo__checkbox sr-only">
           <label for="todo-2" class="todo__label">
@@ -41,7 +60,7 @@
             <span class="todo__tag todo__tag--medium">medium</span>
           </label>
         </li>
-        <!-- Todo 3 -->
+        <!-- Todo 3: Workout -->
         <li class="todo">
           <input type="checkbox" id="todo-3" class="todo__checkbox sr-only">
           <label for="todo-3" class="todo__label">
@@ -62,7 +81,7 @@
         <span class="category__chevron"></span>
       </summary>
       <ul class="category__list">
-        <!-- Todo 4 -->
+        <!-- Todo 4: Emails -->
         <li class="todo">
           <input type="checkbox" id="todo-4" class="todo__checkbox sr-only">
           <label for="todo-4" class="todo__label">
@@ -71,7 +90,7 @@
             <span class="todo__tag todo__tag--medium">medium</span>
           </label>
         </li>
-        <!-- Todo 5 -->
+        <!-- Todo 5: Ship feature -->
         <li class="todo">
           <input type="checkbox" id="todo-5" class="todo__checkbox sr-only">
           <label for="todo-5" class="todo__label">
@@ -80,7 +99,7 @@
             <span class="todo__tag todo__tag--high">high</span>
           </label>
         </li>
-        <!-- Todo 6 -->
+        <!-- Todo 6: Code review -->
         <li class="todo">
           <input type="checkbox" id="todo-6" class="todo__checkbox sr-only">
           <label for="todo-6" class="todo__label">
@@ -89,7 +108,7 @@
             <span class="todo__tag todo__tag--medium">medium</span>
           </label>
         </li>
-        <!-- Todo 7 -->
+        <!-- Todo 7: Docs -->
         <li class="todo">
           <input type="checkbox" id="todo-7" class="todo__checkbox sr-only">
           <label for="todo-7" class="todo__label">
@@ -110,7 +129,7 @@
         <span class="category__chevron"></span>
       </summary>
       <ul class="category__list">
-        <!-- Todo 8 -->
+        <!-- Todo 8: Read -->
         <li class="todo">
           <input type="checkbox" id="todo-8" class="todo__checkbox sr-only">
           <label for="todo-8" class="todo__label">
@@ -119,16 +138,16 @@
             <span class="todo__tag todo__tag--low">low</span>
           </label>
         </li>
-        <!-- Todo 9 -->
+        <!-- Todo 9: Plan -->
         <li class="todo">
           <input type="checkbox" id="todo-9" class="todo__checkbox sr-only">
           <label for="todo-9" class="todo__label">
             <span class="todo__checkmark"></span>
-            <span class="todo__text">Plan tomorrow's tasks</span>
+            <span class="todo__text">Plan tomorrow&#39;s tasks</span>
             <span class="todo__tag todo__tag--medium">medium</span>
           </label>
         </li>
-        <!-- Todo 10 -->
+        <!-- Todo 10: Detox -->
         <li class="todo">
           <input type="checkbox" id="todo-10" class="todo__checkbox sr-only">
           <label for="todo-10" class="todo__label">
@@ -139,6 +158,11 @@
         </li>
       </ul>
     </details>
+
+    <!-- ===== Footer ===== -->
+    <footer class="footer">
+      <p class="footer__text">🌿 Ahintodew — a hint of clarity for your day</p>
+    </footer>
 
   </div>
 </body>

@@ -28,7 +28,7 @@ summary::-webkit-details-marker {
   font-size: var(--font-size-lg);
   color: var(--color-text);
   user-select: none;
-  transition: background var(--transition-base);
+  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .category__header:hover {
@@ -58,35 +58,47 @@ summary::-webkit-details-marker {
   color: var(--color-text-secondary);
 }
 
-/* --- Chevron (CSS-only arrow) --- */
+/* --- Chevron (CSS-only arrow using borders) --- */
 .category__chevron {
   display: inline-block;
   width: 8px;
   height: 8px;
   border-right: 2px solid var(--color-gray-500);
   border-bottom: 2px solid var(--color-gray-500);
-  transform: rotate(90deg);
-  transition: transform var(--transition-base);
+  transform: rotate(-45deg);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
 }
 
-details[open] .category__chevron {
-  transform: rotate(180deg);
+/* Chevron rotates from 90° (right-pointing) to 180° (down-pointing) on open */
+details[open] > summary .category__chevron {
+  transform: rotate(45deg);
 }
 
-/* --- Category List --- */
+/* --- Category List (smooth open/close via max-height) --- */
 .category__list {
   padding: 0 var(--space-3) var(--space-3);
+  list-style: none;
+  margin: 0;
   max-height: 0;
   overflow: hidden;
-  transition: max-height var(--transition-slow);
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 details[open] > .category__list {
-  max-height: 500px;
+  max-height: 600px;
 }
 
 /* --- Spacing between todo items --- */
 .category__list > .todo + .todo {
   margin-top: var(--space-1);
+}
+
+/* --- Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .category__header,
+  .category__chevron,
+  .category__list {
+    transition: none;
+  }
 }
