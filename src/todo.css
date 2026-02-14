@@ -1,86 +1,150 @@
 /* ============================================
    AHINTODEW — Todo Item Component
+   BEM: .todo, .todo__*, .todo--*
    ============================================ */
 
 /* --- Todo Item --- */
 .todo {
+  position: relative;
   counter-increment: total-tasks;
+  transition: transform var(--transition-base), opacity var(--transition-base);
 }
 
-/* --- Checkbox (visually hidden via .sr-only in base.css) --- */
+.todo + .todo {
+  margin-top: var(--space-2);
+}
+
+/* --- Checkbox (visually hidden, drives :checked state) --- */
 .todo__checkbox {
-  /* .sr-only class handles hiding; this selector for counter */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .todo__checkbox:checked {
   counter-increment: completed-tasks;
 }
 
-/* --- Label (main interactive row) --- */
+/* --- Label (the visible clickable row) --- */
 .todo__label {
   display: flex;
   align-items: center;
   gap: var(--space-3);
   padding: var(--space-3) var(--space-4);
-  cursor: pointer;
-  border-radius: var(--radius-md);
-  transition: background var(--transition-base), transform var(--transition-spring);
   min-height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  cursor: pointer;
+  transition: background var(--transition-base),
+              box-shadow var(--transition-base),
+              transform var(--transition-base);
 }
 
 .todo__label:hover {
   background: var(--color-surface-hover);
+  box-shadow: var(--glass-shadow-hover);
+  transform: translateY(-1px);
 }
 
-/* --- Focus-visible on checkbox → outline on label --- */
+/* --- Focus-visible ring for keyboard accessibility --- */
 .todo__checkbox:focus-visible + .todo__label {
   outline: 2px solid var(--color-dew-500);
   outline-offset: 2px;
 }
 
-/* --- Checkmark circle --- */
+/* --- Custom Checkmark --- */
 .todo__checkmark {
+  position: relative;
   flex-shrink: 0;
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   border-radius: var(--radius-full);
   border: 2px solid var(--color-gray-300);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: border-color var(--transition-base), background var(--transition-base);
-  position: relative;
+  background: var(--color-white);
+  transition: background var(--transition-base),
+              border-color var(--transition-base),
+              transform var(--transition-spring);
 }
 
-/* Checkmark tick via ::after */
 .todo__checkmark::after {
   content: '';
-  display: block;
+  position: absolute;
+  top: 4px;
+  left: 7px;
   width: 6px;
   height: 10px;
   border: solid var(--color-white);
   border-width: 0 2px 2px 0;
   transform: rotate(45deg) scale(0);
-  transition: transform var(--transition-base);
+  transition: transform var(--transition-spring);
 }
 
-/* --- Todo text --- */
+/* Checked checkmark */
+.todo__checkbox:checked + .todo__label .todo__checkmark {
+  background: var(--color-check);
+  border-color: var(--color-check);
+  transform: scale(1.1);
+}
+
+.todo__checkbox:checked + .todo__label .todo__checkmark::after {
+  transform: rotate(45deg) scale(1);
+}
+
+/* --- Todo Text --- */
 .todo__text {
   flex: 1;
+  position: relative;
   font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
   color: var(--color-text);
-  transition: color var(--transition-base), text-decoration var(--transition-base);
+  line-height: var(--line-height-normal);
+  transition: color var(--transition-base);
 }
 
-/* --- Tags (priority pills) --- */
+/* Strikethrough pseudo-element: scaleX(0) → scaleX(1) on check */
+.todo__text::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1.5px;
+  background: var(--color-text-completed);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Checked text state */
+.todo__checkbox:checked + .todo__label .todo__text {
+  color: var(--color-text-completed);
+}
+
+.todo__checkbox:checked + .todo__label .todo__text::after {
+  transform: scaleX(1);
+}
+
+/* --- Priority Tags --- */
 .todo__tag {
-  border-radius: var(--radius-full);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
-  padding: var(--space-1) var(--space-2);
-  line-height: 1;
-  white-space: nowrap;
   flex-shrink: 0;
+  padding: var(--space-1) var(--space-2);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: var(--radius-full);
+  line-height: 1;
+  transition: opacity var(--transition-base);
 }
 
 .todo__tag--high {
@@ -90,43 +154,22 @@
 
 .todo__tag--medium {
   background: rgba(251, 191, 36, 0.15);
-  color: #b45309;
+  color: var(--color-medium);
 }
 
 .todo__tag--low {
   background: rgba(45, 212, 191, 0.15);
-  color: #0f766e;
+  color: var(--color-low);
 }
 
-/* --- Checked State --- */
-.todo__checkbox:checked + .todo__label {
+/* Fade tag on completion */
+.todo__checkbox:checked + .todo__label .todo__tag {
+  opacity: 0.5;
+}
+
+/* --- Completed modifier (optional class-based) --- */
+.todo--completed .todo__label {
   opacity: 0.7;
-  transform: scale(1.02);
-}
-
-.todo__checkbox:checked + .todo__label .todo__checkmark {
-  background: var(--color-check);
-  border-color: var(--color-check);
-}
-
-.todo__checkbox:checked + .todo__label .todo__checkmark::after {
-  transform: rotate(45deg) scale(1);
-}
-
-.todo__checkbox:checked + .todo__label .todo__text {
-  text-decoration: line-through;
-  color: var(--color-text-completed);
-}
-
-/* Reset scale after spring animation */
-.todo__checkbox:checked + .todo__label {
-  animation: todo-check-pop var(--transition-spring) forwards;
-}
-
-@keyframes todo-check-pop {
-  0%   { transform: scale(1); }
-  40%  { transform: scale(1.02); }
-  100% { transform: scale(1); }
 }
 
 /* --- Reduced Motion --- */
@@ -134,11 +177,46 @@
   .todo__label,
   .todo__checkmark,
   .todo__checkmark::after,
-  .todo__text {
+  .todo__text,
+  .todo__text::after,
+  .todo__tag {
     transition: none;
   }
+}
 
-  .todo__checkbox:checked + .todo__label {
-    animation: none;
+/* --- Dark Mode Enhancement --- */
+@media (prefers-color-scheme: dark) {
+  .todo__label {
+    background: rgba(30, 41, 59, 0.55);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .todo__label:hover {
+    background: rgba(30, 41, 59, 0.72);
+  }
+
+  .todo__checkmark {
+    background: var(--color-gray-800);
+    border-color: var(--color-gray-600);
+  }
+
+  .todo__text {
+    color: var(--color-gray-100);
+  }
+
+  .todo__checkbox:checked + .todo__label .todo__text {
+    color: var(--color-gray-500);
+  }
+
+  .todo__tag--high {
+    background: rgba(248, 113, 113, 0.2);
+  }
+
+  .todo__tag--medium {
+    background: rgba(251, 191, 36, 0.2);
+  }
+
+  .todo__tag--low {
+    background: rgba(45, 212, 191, 0.2);
   }
 }
