@@ -1,0 +1,100 @@
+/* ============================================
+   AHINTODEW — Header & Branding
+   ============================================ */
+
+@import 'tokens.css';
+
+/* --- Header: Sticky Glass Panel --- */
+.header {
+  position: sticky;
+  top: var(--space-4);
+  z-index: var(--z-header);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-6) var(--space-8);
+  margin-bottom: var(--space-6);
+  overflow: hidden;
+  transition: box-shadow var(--transition-base), background var(--transition-base);
+}
+
+/* --- Dew-drop decorative element --- */
+.header::before {
+  content: '';
+  position: absolute;
+  top: calc(-1 * var(--space-6));
+  right: calc(-1 * var(--space-6));
+  width: 120px;
+  height: 120px;
+  border-radius: var(--radius-full);
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(74, 222, 128, 0.4),
+    rgba(21, 128, 61, 0.1) 60%,
+    transparent 70%
+  );
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: var(--z-bg);
+}
+
+/* --- Brand --- */
+.header__brand {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.header__title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  background: linear-gradient(135deg, var(--color-dew-400), var(--color-dew-700));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.header__subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-style: italic;
+  font-weight: var(--font-weight-normal);
+}
+
+/* --- Stats --- */
+.header__stats {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+}
+
+.header__stat {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* --- CSS Counter Display --- */
+.header__counter {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-dew-600);
+}
+
+.header__counter--total::after {
+  content: counter(total-tasks);
+}
+
+.header__counter--done::after {
+  content: counter(completed-tasks);
+}
+
+/* --- Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .header {
+    transition: none;
+  }
+}
