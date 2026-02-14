@@ -1,0 +1,112 @@
+/* ==========================================================================
+   Category Sections — Collapsible <details> with glassmorphism
+   ========================================================================== */
+
+/* --- Remove default details marker --- */
+summary {
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* --- Category container --- */
+.category {
+  margin-bottom: var(--space-4);
+  border-left: 3px solid var(--color-dew-300);
+  border-radius: var(--radius-panel);
+  overflow: hidden;
+}
+
+/* --- Glass mixin applied via .glass class (shared foundation) --- */
+/* .category also carries .glass from HTML */
+
+/* --- Category header (the <summary>) --- */
+.category__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+  user-select: none;
+  -webkit-user-select: none;
+  transition: background var(--transition-base);
+}
+
+.category__header:hover {
+  background: var(--color-surface-hover, rgba(255, 255, 255, 0.1));
+}
+
+/* Focus-visible accessibility ring */
+.category__header:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* --- Icon --- */
+.category__icon {
+  flex-shrink: 0;
+  font-size: var(--font-size-xl, 1.25rem);
+  line-height: 1;
+}
+
+/* --- Title --- */
+.category__title {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* --- Chevron (CSS-only arrow) --- */
+.category__chevron {
+  flex-shrink: 0;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid currentColor;
+  opacity: 0.6;
+  transition: transform var(--transition-base);
+  transform: rotate(90deg);
+}
+
+/* Rotate chevron when open */
+details[open] .category__chevron {
+  transform: rotate(180deg);
+}
+
+/* --- Category list (todo container) --- */
+.category__list {
+  padding: 0 var(--space-3) var(--space-3);
+  margin: 0;
+  list-style: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-base);
+}
+
+/* Expand list when open */
+details[open] .category__list {
+  max-height: 800px; /* generous max-height for smooth transition */
+}
+
+/* Spacing between todo items */
+.category__list > .todo + .todo {
+  margin-top: var(--space-1);
+}
+
+/* ==========================================================================
+   Reduced motion preference
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .category__chevron,
+  .category__list {
+    transition: none;
+  }
+}
