@@ -1,0 +1,92 @@
+/* ============================================
+   AHINTODEW — Category Section Styles
+   ============================================ */
+
+/* --- Category Block --- */
+.category {
+  margin-bottom: var(--space-4);
+  border-left: 3px solid var(--color-dew-300);
+}
+
+/* --- Remove default details marker --- */
+summary {
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* --- Category Header --- */
+.category__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+  user-select: none;
+  transition: background var(--transition-base);
+}
+
+.category__header:hover {
+  background: var(--color-surface-hover);
+}
+
+.category__header:focus-visible {
+  outline: 2px solid var(--color-dew-500);
+  outline-offset: 2px;
+}
+
+/* --- Category Icon --- */
+.category__icon {
+  font-size: var(--font-size-xl);
+  line-height: 1;
+}
+
+/* --- Category Title --- */
+.category__title {
+  flex: 1;
+}
+
+/* --- Category Count --- */
+.category__count {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+/* --- Chevron (CSS-only arrow) --- */
+.category__chevron {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--color-gray-500);
+  border-bottom: 2px solid var(--color-gray-500);
+  transform: rotate(90deg);
+  transition: transform var(--transition-base);
+  flex-shrink: 0;
+}
+
+details[open] .category__chevron {
+  transform: rotate(180deg);
+}
+
+/* --- Category List --- */
+.category__list {
+  padding: 0 var(--space-3) var(--space-3);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-slow);
+}
+
+details[open] > .category__list {
+  max-height: 500px;
+}
+
+/* --- Spacing between todo items --- */
+.category__list > .todo + .todo {
+  margin-top: var(--space-1);
+}
