@@ -1,0 +1,136 @@
+/* ==========================================================================
+   Category Sections — Collapsible <details> with glass styling
+   ========================================================================== */
+
+/* --- Category container --- */
+.category {
+  margin-bottom: var(--space-4);
+  border-left: 3px solid var(--color-dew-300);
+  border-radius: var(--radius-panel, 16px);
+  overflow: hidden;
+}
+
+/* --- Remove default <details> marker --- */
+summary {
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* --- Header row --- */
+.category__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+  user-select: none;
+  -webkit-user-select: none;
+  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category__header:hover {
+  background: rgba(45, 212, 168, 0.08);
+}
+
+/* Focus-visible ring for keyboard accessibility */
+.category__header:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-panel, 16px);
+}
+
+/* --- Icon --- */
+.category__icon {
+  font-size: 1.25rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* --- Title --- */
+.category__title {
+  flex: 1;
+  min-width: 0;
+}
+
+/* --- Chevron (CSS-only arrow) --- */
+.category__chevron {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--color-text-secondary);
+  border-bottom: 2px solid var(--color-text-secondary);
+  transform: rotate(-45deg);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+details[open] .category__chevron {
+  transform: rotate(45deg);
+}
+
+/* --- List container with smooth open/close --- */
+.category__list {
+  padding: 0 var(--space-3) var(--space-3);
+  margin: 0;
+  list-style: none;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+details[open] .category__list {
+  max-height: 600px; /* generous max-height for smooth transition */
+  opacity: 1;
+  padding: 0 var(--space-3) var(--space-3);
+}
+
+/* Gap between todo items */
+.category__list > .todo + .todo {
+  margin-top: var(--space-1);
+}
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .category__chevron,
+  .category__list,
+  .category__header {
+    transition: none;
+  }
+
+  .category__list {
+    max-height: none;
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   Dark mode adjustments
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+  .category {
+    border-left-color: var(--color-secondary);
+  }
+
+  .category__header:hover {
+    background: rgba(45, 212, 168, 0.12);
+  }
+
+  .category__chevron {
+    border-color: var(--color-muted);
+  }
+}
