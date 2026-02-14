@@ -1,0 +1,141 @@
+/* ==========================================================================
+   Category Sections — Collapsible <details> with glass morphism
+   ========================================================================== */
+
+/* Remove default details marker */
+summary {
+  list-style: none;
+}
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Category container */
+.category {
+  margin-bottom: var(--space-4);
+  border-left: 3px solid var(--color-dew-300);
+  border-radius: var(--radius-panel, 16px);
+  overflow: hidden;
+}
+
+/* Glass styles (applied via .glass class but scoped here for category) */
+.category.glass {
+  background: var(--color-surface);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--color-surface-border);
+  border-left: 3px solid var(--color-dew-300);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.06),
+    0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+/* Fallback for browsers without backdrop-filter */
+@supports not (backdrop-filter: blur(20px)) {
+  .category.glass {
+    background: rgba(255, 255, 255, 0.85);
+  }
+}
+
+/* Category header (summary) */
+.category__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-lg);
+  color: var(--color-text);
+  user-select: none;
+  transition: background 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category__header:hover {
+  background: rgba(45, 212, 168, 0.06);
+}
+
+/* Focus-visible for keyboard accessibility */
+.category__header:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-panel, 16px);
+}
+
+/* Category icon */
+.category__icon {
+  font-size: 1.25rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Category title */
+.category__title {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Chevron — CSS-only arrow using borders */
+.category__chevron {
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 8px solid var(--color-text-secondary);
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: rotate(90deg);
+}
+
+/* Chevron rotates when details is open */
+details[open] .category__chevron {
+  transform: rotate(180deg);
+}
+
+/* Category list */
+.category__list {
+  padding: 0 var(--space-3) var(--space-3);
+  margin: 0;
+  list-style: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+details[open] .category__list {
+  max-height: 800px; /* Generous max-height for transition */
+  padding: 0 var(--space-3) var(--space-3);
+}
+
+/* Spacing between todo items */
+.category__list > .todo + .todo {
+  margin-top: var(--space-1);
+}
+
+/* ==========================================================================
+   Reduced motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .category__chevron,
+  .category__list {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   Dark mode adjustments
+   ========================================================================== */
+@media (prefers-color-scheme: dark) {
+  .category.glass {
+    background: rgba(15, 23, 42, 0.6);
+    border-color: rgba(45, 212, 168, 0.15);
+    border-left-color: var(--color-dew-300);
+  }
+
+  .category__header:hover {
+    background: rgba(45, 212, 168, 0.08);
+  }
+}
